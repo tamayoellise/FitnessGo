@@ -1,0 +1,4380 @@
+ScreenManager:
+    WelcomeWindow:
+    LogInWindow:
+    SignUpWindow:
+    PersonalInfoWindow:
+    FitnessObjectiveWindow:
+    CongratulationWindow:
+    HomePageWindow:
+    CalorieWindow:
+    GWeightWindow:
+    GWeight1:
+    GWeight2:
+    GWeight3:
+    GWeight4:
+    GWeight5:
+    GMusclesWindow:
+    GMuscles1:
+    GMuscles2:
+    GMuscles3:
+    GMuscles4:
+    GMuscles5:
+    LWeightWindow:
+    LWeight1:
+    LWeight2:
+    LWeight3:
+    LWeight4:
+    LWeight5:
+    MWeightWindow:
+    MWeight1:
+    MWeight2:
+    MWeight3:
+    MWeight4:
+    MWeight5:
+    ProfileWindow:
+    PData:
+    PGoals:
+    DiaryWindow:
+    SettingsWindow:
+    AboutWindow:
+
+<WelcomeWindow>:
+    name: "welcome"
+    id: welcome
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "login"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "46dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_y": .8}
+
+    Image: #logo
+        source: 'logo.png'
+        size_hint: None, None
+        width: "200dp"
+        height: "200dp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+
+<LogInWindow>:
+    name: "login"
+    id: login
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "35dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .6, "center_y": .8}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        width: "80dp"
+        height: "80dp"
+        pos_hint: {"center_x": .2, "center_y": .8}
+
+    MDTextField:
+        id: username
+        hint_text: "Username"
+        icon_right: 'account'
+        font_size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.65}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        text_color_normal: 0, 0, 0, 1
+        text_color_focus: 0, 0, 0, 1
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1
+
+    MDTextField:
+        id: pss
+        hint_text: "Password"
+        password: True
+        icon_right: 'eye-off'
+        font_size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.5}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        password_mask: "•"
+        text_color_normal: 0, 0, 0, 1
+        text_color_focus: 0, 0, 0, 1
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1
+
+    BoxLayout:
+        size_hint: .85, None
+        height: "30dp"
+        pos_hint: {'center_x': .5, 'center_y': .4}
+        orientation: 'horizontal'
+        spacing: "5dp"
+
+        MDCheckbox:
+            id: cb
+            size_hint: None, None
+            width: "30dp"
+            height: "30dp"
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            color_active: 0, 1, 0, 1
+            color_inactive: 0, 1, 0, 1
+            on_press:
+                pss.password = not pss.password
+                pss.icon_right = "eye" if pss.icon_right == "eye-off" else "eye-off"
+
+        MDLabel:
+            text: "[ref=Show Password]Show Password[/ref]"
+            markup: True
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            on_ref_press:
+                cb.active = not cb.active
+                pss.password = not pss.password
+                pss.icon_right = "eye" if pss.icon_right == "eye-off" else "eye-off"
+
+    MDRaisedButton:
+        text: "Log In"
+        font_size: "20dp"
+        pos_hint: {"center_x": .5, "center_y":.3}
+        md_bg_color: "#008000"
+        on_release: app.login()
+
+    MDRaisedButton:
+        text: "Create Account"
+        font_size: "20dp"
+        pos_hint: {"center_x": .5, "center_y": .2}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = "signup"
+
+<SignUpWindow>:
+    name: "signup"
+    id: signup
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "35dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .6, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        width: "80dp"
+        height: "80dp"
+        pos_hint: {"center_x": .2, "center_y": .9}
+
+    MDLabel:
+        id: welcome_lbl
+        text: "Transform Your Body,\n Join Fitness Go Now!"
+        font_size: "20dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    MDTextField:
+        id: username
+        hint_text: "Username"
+        icon_right: 'account'
+        font_Size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.70}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        text_color_normal: 0, 0, 0, 1
+        text_color_focus: 0, 0, 0, 1
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    MDTextField:
+        id: email
+        hint_text: "Email"
+        icon_right: 'email'
+        font_Size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.60}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    MDTextField:
+        id: password
+        hint_text: "Password"
+        password: True
+        icon_right: 'eye-off'
+        font_Size: "400dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.50}
+        helper_text: "minimum of 8 characters"
+        helper_text_mode: "on_focus"
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        password_mask: "•"
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    BoxLayout:
+        size_hint: .85, None
+        height: "30dp"
+        pos_hint: {'center_x': .5, 'center_y': .43}
+        orientation: 'horizontal'
+        spacing: "5dp"
+
+        MDCheckbox:
+            id: cb
+            size_hint: None, None
+            width: "30dp"
+            height: "30dp"
+            pos_hint: {'center_x': .5, 'center_y': -.25}
+            color_active: 0, 1, 0, 1  # Green when active
+            color_inactive: 0, 1, 0, 1  # Darker green when inactive
+            on_press:
+                password.password = False if password.password == True else True
+                password.icon_right = "eye" if password.icon_right == "eye-off" else "eye-off"
+
+        MDLabel:
+            text: "[ref=Show Password]Show Password[/ref]"
+            markup: True
+            pos_hint: {'center_x': .100, 'center_y': -.25}
+            on_ref_press:
+                cb.active = False if cb.active == True else True
+                password.password = False if password.password == True else True
+                password.icon_right = "eye" if password.icon_right == "eye-off" else "eye-off"
+
+    BoxLayout:
+        size_hint: .85, None
+        height: "30dp"
+        pos_hint: {'center_x': .5, 'center_y': .28}
+        orientation: 'horizontal'
+        spacing: "5dp"
+
+
+    MDRaisedButton:
+        text: "Back"
+        font_size: "20dp"
+        pos_hint: {"center_x": .2, "center_y": .1}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            root.manager.current = "login"
+
+    MDRaisedButton:
+        text: "Next"
+        font_size: "20dp"
+        pos_hint: {"center_x": .8, "center_y": .1}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "left"
+            app.signup_user()
+
+<PersonalInfoWindow>:
+    name: "personal_info"
+    id: personal_info
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "signup"
+
+    MDLabel:
+        text: "Personal Info:"
+        font_size: "30dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .6, "center_y": .8}
+
+    MDTextField:
+        id: customer_name
+        hint_text: "Name:"
+        font_Size: "20dp"
+        mode: "line"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.70}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    MDTextField:
+        id: customer_age
+        hint_text: "Age:"
+        font_Size: "20dp"
+        size_hint_x: .85
+        mode: "line"
+        pos_hint: {'center_x':.5, 'center_y':.60}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    MDTextField:
+        id: customer_gender
+        hint_text: "Gender"
+        font_size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.5}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "line"
+        text_color_normal: 0, 0, 0, 1
+        text_color_focus: 0, 0, 0, 1
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1
+        on_focus: app.gender(self, self.focus)
+
+    MDTextField:
+        id: customer_height
+        hint_text: "Height (cm):"
+        font_Size: "20dp"
+        size_hint_x: .85
+        mode: "line"
+        pos_hint: {'center_x':.5, 'center_y':.40}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    MDTextField:
+        id: customer_weight
+        hint_text: "Weight (kg):"
+        font_Size: "20dp"
+        size_hint_x: .85
+        mode: "line"
+        pos_hint: {'center_x':.5, 'center_y':.30}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+    MDRaisedButton:
+        text: "Next"
+        font_size: "20dp"
+        pos_hint: {"center_x": .8, "center_y": .1}
+        md_bg_color: "#008000"
+        on_release:
+            app.save_personal_info()
+
+
+<FitnessObjectiveWindow>:
+    name: "fitness_objective"
+    id: fitness_objective
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "personal info"
+
+
+    MDRaisedButton:
+        text: "Sign Up"
+        font_size: "20dp"
+        pos_hint: {"center_x": .8, "center_y": .1}
+        md_bg_color: "#008000"
+        on_release:
+            app.signup_user()
+            app.root.current = "congratulations"
+
+
+    MDTextField:
+        id: customer_objective
+        hint_text: "Fitness Objective:"
+        font_Size: "20dp"
+        mode: "line"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.70}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+        on_focus: app.objective(self, self.focus)
+
+    MDTextField:
+        id: customer_activity
+        hint_text: "Activity level:"
+        font_Size: "20dp"
+        size_hint_x: .85
+        mode: "line"
+        pos_hint: {'center_x':.5, 'center_y':.60}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+        on_focus: app.activity(self, self.focus)
+
+    MDTextField:
+        id: customer_desired
+        hint_text: "Desired Weight (kg):"
+        font_Size: "20dp"
+        size_hint_x: .85
+        mode: "line"
+        pos_hint: {'center_x':.5, 'center_y':.50}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+
+    MDTextField:
+        id: customer_months
+        hint_text: "How many months process:"
+        font_Size: "20dp"
+        size_hint_x: .85
+        mode: "line"
+        pos_hint: {'center_x':.5, 'center_y':.40}
+        on_text: self.text = self.text.replace(" ", "")
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        text_color_normal: 0, 0, 0, 1  # Black text when not focused
+        text_color_focus: 0, 0, 0, 1  # Black text when focused
+        icon_right_color_focus: 0, 1, 0, 1  # Black icon when focused
+        hint_text_color_focus: 0, 1, 0, 1  # Black hint text when focused
+
+
+
+    MDLabel:
+        text: "Goals:"
+        font_size: "30dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .6, "center_y": .8}
+
+
+<CongratulationWindow>:
+    name: "congratulations"
+    id: congratulations
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDRaisedButton:
+        text: "Continue"
+        font_size: "20dp"
+        pos_hint: {"center_x": .8, "center_y": .1}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = "home"
+
+    MDLabel:
+        text: "Congratulations!"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    MDLabel:
+        text: "You have successfully created an account"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .73}
+
+    MDLabel:
+        id: congratulation_message
+        text: "1,200 Calories"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .47}
+
+    MDLabel:
+        text: "Trust the Process!"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .33}
+
+<HomePageWindow>:
+    name: "home"
+    id: home
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "close"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release: app.stop()
+
+    MDIconButton:
+        icon: "account"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "profile"
+
+    MDLabel:
+        id: customer_name
+        text: "Hi,"
+        font_size: "30dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .6, "center_y": .8}
+
+    MDRoundFlatButton:
+        text: "Calorie Counter"
+        font_size: "30dp"
+        pos_hint: {"center_x": .5, "center_y": .71}
+        md_bg_color: "#008000"
+        text_color: 1,1,1,1
+        line_color: 0/255, 128/255 ,0/255 ,1
+        on_release:
+            root.manager.transition.direction = "up"
+            root.manager.current = "calorie"
+
+    MDLabel:
+        text: "Fitness Goals"
+        font_size: "35dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_y": .63}
+
+    MDFlatButton:
+        width: "140dp"
+        height: "130dp"
+        pos_hint: {"center_x": .3, "center_y": .48}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "up"
+            root.manager.current = "Gain Weight"
+
+        MDLabel:
+            text: "Gain Weight"
+            font_size: "30dp"
+            halign: "center"
+            color: "#FFFFFF"
+            pos_hint: {"center_y": .3}
+
+    MDFlatButton:
+        width: "140dp"
+        height: "130dp"
+        pos_hint: {"center_x": .7, "center_y": .48}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "up"
+            root.manager.current = "Gain Muscles"
+
+        MDLabel:
+            text: "Gain Muscles"
+            font_size: "30dp"
+            halign: "center"
+            color: "#FFFFFF"
+            pos_hint: {"center_y": .3}
+
+    MDFlatButton:
+        width: "140dp"
+        height: "130dp"
+        pos_hint: {"center_x": .3, "center_y": .27}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "up"
+            root.manager.current = "Lose Weight"
+
+        MDLabel:
+            text: "Lose Weight"
+            font_size: "30dp"
+            halign: "center"
+            color: "#FFFFFF"
+            pos_hint: {"center_y": .3}
+
+    MDFlatButton:
+        width: "140dp"
+        height: "130dp"
+        pos_hint: {"center_x": .7, "center_y": .27}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "up"
+            root.manager.current = "Maintain Weight"
+        MDLabel:
+            text: "Maintain Weight"
+            font_size: "30dp"
+            halign: "center"
+            color: "#FFFFFF"
+            pos_hint: {"center_y": .3}
+
+    FloatLayout:
+
+        MDBottomAppBar:
+            md_bg_color: "#004d00"
+            elevation: 1
+            height: 85
+
+        MDRoundFlatButton:
+            text: "Diary"
+            font_size: "20dp"
+            pos_hint: {"center_x": .18, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "diary"
+
+        MDRoundFlatButton:
+            text: "Home"
+            font_size: "20dp"
+            pos_hint: {"center_x": .46, "center_y": .05}
+            md_bg_color: "#ffffff"
+            text_color: 0/255, 128/255 ,0/255 ,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            line_width: 2
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "home"
+
+        MDRoundFlatButton:
+            text: "Settings"
+            font_size: "20dp"
+            pos_hint: {"center_x": .77, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "settings"
+
+<CalorieWindow>:
+    name: "calorie"
+    id: calorie
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "account"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "profile"
+
+    MDLabel:
+        text: "Calorie Counter"
+        font_size: "40dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .55, "center_y": .82}
+
+    MDLabel:
+        id: date_label
+        text: ""
+        font_size: "25dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .55, "center_y": .75}
+
+    MDCard:
+        orientation: "vertical"
+        size_hint: None, None
+        size: "145dp", "80dp"
+        pos_hint: {"center_x": 0.25, "center_y": 0.65}
+        md_bg_color: "#008000"
+        padding: 10
+        spacing: 10
+
+        MDLabel:
+            id: calorie_intake
+            text: "Calorie Intake\n 1,200  "
+            font_size: "20dp"
+            halign: "center"
+            color: "#ffffff"
+            pos_hint: {"center_x": .5, "center_y": .7}
+
+    MDCard:
+        orientation: "vertical"
+        size_hint: None, None
+        size: "145dp", "80dp"
+        pos_hint: {"center_x": 0.75, "center_y": 0.65}
+        md_bg_color: "#008000"
+        padding: 10
+        spacing: 10
+
+        MDLabel:
+            id: calorie_left
+            text: "Calorie Left\n 1,200  "
+            font_size: "20dp"
+            halign: "center"
+            color: "#ffffff"
+            pos_hint: {"center_x": .5, "center_y": .7}
+
+    MDTextField:
+        id: food_name
+        hint_text: "Enter food item"
+        icon_right: 'food'
+        font_size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.53}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        text_color_normal: [0.5, 0.5, 0.5, 1.0]
+        text_color_focus: [0.0, 0.5, 0.0, 1.0]
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1
+        on_text: app.validate_inputs()
+
+    MDTextField:
+        id: food_quantity
+        hint_text: "Enter quantity in grams"
+        icon_right: 'scale'
+        font_size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.43}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        text_color_normal: [0.5, 0.5, 0.5, 1.0]
+        text_color_focus: [0.0, 0.5, 0.0, 1.0]
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1
+        on_text: app.validate_inputs()
+
+    MDTextField:
+        id: meal_category
+        hint_text: "Select Meal"
+        font_size: "20dp"
+        size_hint_x: .85
+        pos_hint: {'center_x':.5, 'center_y':.33}
+        write_tab: False
+        line_color_normal: 0, 1, 0, 1
+        line_color_focus: 0, 1, 0, 1
+        mode: "rectangle"
+        text_color_normal: [0.5, 0.5, 0.5, 1.0]
+        text_color_focus: [0.0, 0.5, 0.0, 1.0]
+        icon_right_color_focus: 0, 1, 0, 1
+        hint_text_color_focus: 0, 1, 0, 1
+        on_focus: app.category(self, self.focus)
+        on_text: app.validate_inputs()
+
+    MDRaisedButton:
+        id: get_calories_button
+        text: "Get Calories"
+        font_size: "20dp"
+        pos_hint: {"center_x": .25, "center_y": .18}
+        md_bg_color: "#008000"
+        on_release: app.get_calories(food_name.text, food_quantity.text)
+        disabled: True
+
+    MDRaisedButton:
+        id: saved_button
+        text: "Save"
+        font_size: "20dp"
+        pos_hint: {"center_x": .83, "center_y": .18}
+        md_bg_color: "#008000"
+        on_release: app.saved_food()
+        disabled: True
+
+    MDLabel:
+        id: calorie_output
+        halign: "left"
+        text: "Calories: "
+        font_size: "20dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .28, "center_y": .25}
+
+    FloatLayout:
+
+        MDBottomAppBar:
+            md_bg_color: "#004d00"
+            elevation: 1
+            height: 85
+
+        MDRoundFlatButton:
+            text: "Diary"
+            font_size: "20dp"
+            pos_hint: {"center_x": .18, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "diary"
+
+        MDRoundFlatButton:
+            text: "Home"
+            font_size: "20dp"
+            pos_hint: {"center_x": .47, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "home"
+
+        MDRoundFlatButton:
+            text: "Settings"
+            font_size: "20dp"
+            pos_hint: {"center_x": .77, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "settings"
+
+<GWeightWindow>:
+    name: "Gain Weight"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Weight 1"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Nutrient-Dense Foods"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    MDLabel:
+        text: "High-Calorie Foods:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .55, "center_y": .7}
+
+    MDLabel:
+        text: "Incorporate foods that are high in calories but also provide nutritional benefits, such as nuts, seeds, avocados, and dried fruits."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .62}
+
+    MDLabel:
+        text: "Healthy Fats:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .55, "center_y": .5}
+
+    MDLabel:
+        text: "Include healthy fats like olive oil, coconut oil, and nut butters in your diet. These fats are calorie-dense and can help increase your overall intake."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .4}
+
+    MDLabel:
+        text: "Protein:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .55, "center_y": .28}
+
+    MDLabel:
+        text: "Consume protein-rich foods like lean \n meats, fish, eggs, dairy products, legumes, \n and protein shakes. Protein is essential for \n muscle growth and repair."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .18}
+
+<GWeight1>:
+    name: "Gain Weight 1"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Weight 2"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Weight"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'squat.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Squats"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .53}
+
+    MDLabel:
+        text: "Bend your knees and lower \n your body down as if sitting in \n a chair, then stand back up, \n targeting  your leg muscles."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'bench press.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Bench Press"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .76, "center_y": .28}
+
+    MDLabel:
+        text: "Push a weight away from your \n chest while lying on your back, \n strengthening your chest \n and arm muscles."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'bicep.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Bicep Curls"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: "Lift a weight towards your \n shoulder while keeping your \n upper arm still, targeting your \n biceps."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<GWeight2>:
+    name: "Gain Weight 2"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Weight 3"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Weight 1"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'Deadlifts.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Dead Lift"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .53}
+
+    MDLabel:
+        text: "Lift a weight from the ground  \n to hip level while keeping your \n back straight,  working your \n back and leg muscles."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'push up.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Push Up"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .76, "center_y": .28}
+
+    MDLabel:
+        text: "Lower your body towards the \n ground by bending your elbows, \n then push back up, targeting \n your chest and arms."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'leg press.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Leg Press"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: "Push a weight away with \n your legs while seated, \n working your leg muscles."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<GWeight3>:
+    name: "Gain Weight 3"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Weight 4"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Weight 2"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Gain Weight"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Peanut Butter Banana Smoothie"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'banana.jpg'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •2 tablespoons of peanut butter (32g) - 190 calories \n •1 banana (120g) - 105 calories \n •1 cup of whole milk (240g) - 150 calories \n\n[b]Total approximate calories:[/b] 445 calories \n[b]Directions:[/b] Blend all ingredients \n until smooth."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<GWeight4>:
+    name: "Gain Weight 4"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Weight 5"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Weight 3"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Gain Weight"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Avocado Chicken Salad Sandwich"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'Avocado.jpg'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •1 medium avocado (200g) - 320 calories \n •Chicken breast (113g) - 165 calories \n •2 slices of grain bread (60g) - 160 calories \n •Olive oil for drizzling (10g) - 90 calories \n\n[b]Total approximate calories:[/b] 735 calories \n[b]Directions:[/b] Mash avocado, mix with cooked chicken breast, and spread on whole grain bread. Drizzle with olive oil if desired."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<GWeight5>:
+    name: "Gain Weight 5"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "home"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Weight 4"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release: app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Gain Weight"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Beef Stir-Fry with Rice"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'beef.png'
+        size_hint: None, None
+        width: "230dp"
+        height: "230dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •Beef sirloin (227g) - 400 calories \n •Cooked white rice (158g) - 205 calories \n •Mixed vegetables (bell peppers, broccoli, carrots, etc.) (154g) - 165 calories \n •Olive oil for cooking (15g) - 120 calories \n\n[b]Total approximate calories:[/b] 890 calories \n[b]Directions:[/b] Stir-fry beef and mixed \n vegetables in olive oil until cooked. Serve \n over cooked white rice."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<GMusclesWindow>:
+    name: "Gain Muscles"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Muscles 1"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Nutrition is Key"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    MDLabel:
+        text: "Calorie Surplus:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .72}
+
+    MDLabel:
+        text: "Consume more calories than your body burns to provide the energy needed for muscle growth."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .63}
+
+    MDLabel:
+        text: "Protein Intake:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .55}
+
+    MDLabel:
+        text: "Aim to consume 1.6-2.2 grams of protein per kilogram of body weight per day to support muscle repair and growth."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .48}
+
+    MDLabel:
+        text: "Carbohydrates and Fats:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .38}
+
+    MDLabel:
+        text: "Include complex carbohydrates for energy \n and healthy fats for hormone production \n and overall health."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .3}
+
+    MDLabel:
+        text: "Timing:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .2}
+
+    MDLabel:
+        text: "Eat a balanced meal or snack containing protein and carbohydrates within 1-2 hours before and after your workouts to optimize muscle recovery."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .11}
+
+
+<GMuscles1>:
+    name: "Gain Muscles 1"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Muscles 2"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Muscles"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'pull ups.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Pull-Ups"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .53}
+
+    MDLabel:
+        text: "Hang from a bar, pull your body \n up until your chin is above the bar, \n then lower yourself back down."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'overhead press.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Overhead Press"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .76, "center_y": .28}
+
+    MDLabel:
+        text: "Stand with feet shoulder- \n width apart, hold the barbell at \n shoulder height, press it overhead \n until your arms are extended, \n then lower it back down."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'Tricep Extensions.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Tricep Extensions"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: "Hold a dumbbell or barbell \n overhead, lower it behind your \n head by bending your elbows, \n then extend your arms back up."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<GMuscles2>:
+    name: "Gain Muscles 2"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Muscles 3"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Muscles 1"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'Lunges.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Lunges"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .53}
+
+    MDLabel:
+        text: "Step forward with one leg, \n lowering your hips until both \n knees are bent at 90 degrees, \n then push back up to the \n starting position."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'Preacher Curls.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Preacher Curls"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .76, "center_y": .28}
+
+    MDLabel:
+        text: "Sit at a preacher bench with \n your upper arms resting on the \n pad, curl the barbell or dumbbell \n up, then lower it back down."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'Leg.jpg'
+        size_hint: None, None
+        width: "150dp"
+        height: "150dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Leg Curls"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: "Lie face down on a leg curl \n machine, curl your legs up \n towards your buttocks, then \n lower them back down."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<GMuscles3>:
+    name: "Gain Muscles 3"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Muscles 4"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Muscles 2"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Gain Muscles"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Protein-Packed Oatmeal with \n Almond Butter and Banana"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'oatmeal.jpg'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •1 cup rolled oats (80g) - 300 calories \n •1 tablespoon almond butter (16g) - 100 calories \n •1 banana (120g) - 105 calories \n •1 cup of milk (240g) - 150 calories \n\n[b]Total approximate calories:[/b] 655 calories \n[b]Directions:[/b] Cook oats according to package instructions. Stir in almond butter and sliced banana. Add milk to desired consistency."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<GMuscles4>:
+    name: "Gain Muscles 4"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Gain Muscles 5"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Muscles 3"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Gain Muscles"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Beef and Quinoa Stuffed \n Bell Peppers"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'Peppers.jpg'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •1 cup cooked quinoa (185g) - 220 calories \n •Ground beef (227g) - 360 calories \n •4 medium bell peppers - 120 calories \n •Olive oil for cooking (15g) - 120 calories \n\n[b]Total approximate calories:[/b] 820 calories \n[b]Directions:[/b] Cook the quinoa. Brown ground beef in olive oil. Mix cooked quinoa and ground beef. Stuff mixture into halved bell peppers and bake until peppers are tender."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<GMuscles5>:
+    name: "Gain Muscles 5"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "home"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Gain Muscles 4"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Gain Muscles"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Salmon and Asparagus Foil Packets"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'salmon.jpg'
+        size_hint: None, None
+        width: "200dp"
+        height: "200dp"
+        pos_hint: {"center_x": .5, "center_y": .58}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •Salmon fillet (227g) - 450 calories \n •Asparagus (180g) - 54 calories \n •Olive oil (15g) - 120 calories \n •Lemon slices and herbs for seasoning \n\n[b]Total approximate calories:[/b] 624 calories \n[b]Directions:[/b] Place salmon fillet & asparagus spears on a large piece of foil. Drizzle with olive oil, season with herbs and lemon slices. Fold foil into a packet and bake for 15-20 minutes until salmon is cooked through."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<LWeightWindow>:
+    name: "Lose Weight"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Lose Weight 1"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Healthy Eating"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    MDLabel:
+        text: "Meal Planning:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .72}
+
+    MDLabel:
+        text: "Organize your meals to include a variety of nutrient-dense foods to maintain a balanced and healthy diet."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .64}
+
+    MDLabel:
+        text: "Healthy Cooking Methods:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .55}
+
+    MDLabel:
+        text: "Opt for grilling, baking, steaming, or stir- \n frying to preserve nutrients and minimize unhealthy fats."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .48, "center_y": .47}
+
+    MDLabel:
+        text: "Mindful Eating:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .38}
+
+    MDLabel:
+        text: "Focus on your body's hunger and fullness signals to prevent overeating and eat only when truly hungry."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .3}
+
+    MDLabel:
+        text: "Portion Control:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .2}
+
+    MDLabel:
+        text: "Be mindful of serving sizes to avoid overeating, even with nutritious foods."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .14}
+
+
+<LWeight1>:
+    name: "Lose Weight 1"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1 ,1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Lose Weight 2"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Lose Weight"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'hiit.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "High-Intensity \n Interval Training:"
+        font_size: "17dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .25, "center_y": .51}
+
+    MDLabel:
+        text: " It boosts metabolism, allowing \n you to continue burning \n calories post-exercise."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'body.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Bodyweight Exercises:"
+        font_size: "18dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .72, "center_y": .28}
+
+    MDLabel:
+        text: "Strengthens muscles using \n your own body weight, \n improving functional fitness."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'yoga.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Yoga"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: " Improves flexibility and muscle \n tone while reducing stress \n and promoting mental \n well-being."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<LWeight2>:
+    name: "Lose Weight 2"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Lose Weight 3"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Lose Weight 1"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'jr.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Jump Rope:"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .20, "center_y": .53}
+
+    MDLabel:
+        text: "Excellent for cardiovascular \n fitness and coordination. \n It burns calories quickly and \n can be done almost anywhere."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'jor.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Running or Jogging:"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .74, "center_y": .28}
+
+    MDLabel:
+        text: "Burns significant calories, \n which can help with weight \n loss. Additionally, it improves \n cardiovascular health, \n strengthening \n the heart and lungs."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'wl.png'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Weight Lifting:"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: "Increases muscle mass, which \n boosts metabolism and helps \n with fat loss. It also \n strengthens bones and \n improves overall body strength."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<LWeight3>:
+    name: "Lose Weight 3"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Lose Weight 4"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Lose Weight 2"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Lose Weight "
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Greek Yogurt Parfait"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .77}
+
+    Image:
+        source: 'yogurt.png'
+        size_hint: None, None
+        width: "178dp"
+        height: "178dp"
+        pos_hint: {"center_x": .5, "center_y": .60}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •1 cup Greek yogurt (plain, non-fat) - 130 calories \n •1/2 cup mixed berries (strawberries, blueberries, raspberries) - 40 calories \n •1 tablespoon honey - 60 calories \n •1 tablespoon chia seeds - 60 calories  \n\n[b]Total approximate calories:[/b] 290 calories \n[b]Directions:[/b] Layer Greek yogurt, mixed berries, and chia seeds in a bowl or jar. Drizzle honey on top. Serve immediately or refrigerate for later."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<LWeight4>:
+    name: "Lose Weight 4"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 0/255, 128/255 ,0/255 ,1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Lose Weight 5"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Lose Weight 3"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Lose Weight "
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Veggie Egg Scramble"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .77}
+
+    Image:
+        source: 'scramble.png'
+        size_hint: None, None
+        width: "178dp"
+        height: "178dp"
+        pos_hint: {"center_x": .5, "center_y": .60}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •2 eggs - 140 calories \n •1 cup spinach leaves - 7 calories \n •1/2 tomato, diced - 10 calories \n •Salt and pepper to taste  \n\n[b]Total approximate calories:[/b] 157 calories \n[b]Directions:[/b]Heat a non-stick pan over medium heat. Whisk the eggs in a bowl and season \n with salt and pepper. Add spinach leaves and diced tomato to the pan. Pour in the whisked eggs and scramble until cooked through. \nServe hot."
+        font_size: "17dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<LWeight5>:
+    name: "Lose Weight 5"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 0/255, 128/255 ,0/255 ,1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "home"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Lose Weight 4"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Lose Weight"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Avocado and Egg Toast"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .77}
+
+    Image:
+        source: 'toast.png'
+        size_hint: None, None
+        width: "200dp"
+        height: "200dp"
+        pos_hint: {"center_x": .5, "center_y": .58}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •1 slice of whole grain bread - 80 calories \n •1/2 avocado - 120 calories \n •1 large egg - 70 calories \n •Salt and pepper to taste - negligible calories \n\n[b]Total approximate calories:[/b] 270 calories \n[b]Directions:[/b] Toast the bread. Prepare the avocado. Cook the egg (fried or scrambled). Assemble the toast. Season with additional salt and pepper if desired."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+
+<MWeightWindow>:
+    name: "Maintain Weight"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Maintain Weight 1"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Balanced Diet"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    MDLabel:
+        text: "Eat a Variety of Foods:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .72}
+
+    MDLabel:
+        text: "Include fruits, vegetables, whole grains, lean proteins, and healthy fats."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .66}
+
+    MDLabel:
+        text: "Portion Control:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .57}
+
+    MDLabel:
+        text: "Be mindful of portion sizes to avoid \n overeating. Using smaller plates and paying attention to hunger cues can help manage portions effectively."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .48, "center_y": .48}
+
+    MDLabel:
+        text: "Limit Sugary and Processed Foods: "
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .36}
+
+    MDLabel:
+        text: "Reduce intake of high-sugar snacks, processed foods, and sugary beverages."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .3}
+
+    MDLabel:
+        text: "Hydration:"
+        font_size: "20dp"
+        bold: True
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .53, "center_y": .2}
+
+    MDLabel:
+        text: "Drink plenty of water throughout the day to stay well-hydrated. Proper hydration supports metabolism and overall bodily functions."
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .12}
+
+<MWeight1>:
+    name: "Maintain Weight 1"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Maintain Weight 2"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Maintain Weight"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'brisk walking.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Brisk Walking"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .53}
+
+    MDLabel:
+        text: "Brisk walking burns calories, \n improves cardiovascular health, \n and is easy to incorporate into \n daily routines."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'swimming.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Swimming"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .76, "center_y": .28}
+
+    MDLabel:
+        text: "Swimming provides a full-body \n  workout, is low-impact on the \n joints,improves cardiovascular \n fitness, and builds muscle tone."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'squats.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Squats"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .04}
+
+    MDLabel:
+        text: "Squats build leg and core \n strength, increase metabolism, \n and burn calories effectively."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<MWeight2>:
+    name: "Maintain Weight 2"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Maintain Weight 3"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Maintain Weight 1"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Suggested Exercises"
+        font_size: "30dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .8}
+
+    Image:
+        source: 'Burpees.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .65}
+
+    MDLabel:
+        text: "Burpees"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .23, "center_y": .53}
+
+    MDLabel:
+        text: "Burpees are a high-calorie burner,\n provide a full-body \n workout, improve cardiovascular \n endurance, and build strength."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .65}
+
+    Image:
+        source: 'pilates.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .76, "center_y": .40}
+
+    MDLabel:
+        text: "Pilates"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .76, "center_y": .28}
+
+    MDLabel:
+        text: "Improves core strength and \n stability, enhances flexibility, \n and tones muscles without \n adding bulk."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .3, "center_y": .4}
+
+    Image:
+        source: 'Kettle bell.jpg'
+        size_hint: None, None
+        width: "125dp"
+        height: "125dp"
+        pos_hint: {"center_x": .23, "center_y": .16}
+
+    MDLabel:
+        text: "Kettle bell Exercises"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .27, "center_y": .04}
+
+    MDLabel:
+        text: "Builds strength and endurance, \n burns calories efficiently, and \n enhances functional fitness \n through dynamic movements."
+        font_size: "15dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .7, "center_y": .15}
+
+<MWeight3>:
+    name: "Maintain Weight 3"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Maintain Weight 4"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Maintain Weight 2"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Maintain Weight "
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Grilled Chicken Salad"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'chicken.jpg'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •Grilled chicken breast (3 oz) - 120 calories \n •Mixed greens (2 cups) - 10 calories \n •Cherry tomatoes (5-6 tomatoes) - 15 calories \n •Cucumber (1/2 cucumber) -  15 calories \n •Olive oil and balsamic vinegar dressing (1 tbsp each) - around 120 calories  \n\n[b]Total approximate calories:[/b] 280 calories \n[b]Directions:[/b] Toss all ingredients together in a bowl, drizzle with dressing, and serve."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<MWeight4>:
+    name: "Maintain Weight 4"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "Maintain Weight 5"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Maintain Weight 3"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Maintain Weight "
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Apple with Almond Butter"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'apple.jpg'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .56}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •Apple (medium) - 95 calories \n •Almond butter (1 tbsp) - 95 calories \n\n[b]Total approximate calories:[/b] 190 calories \n[b]Directions:[/b] Slice the apple and dip in \n almond butter."
+        font_size: "18dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<MWeight5>:
+    name: "Maintain Weight 5"
+
+    MDRectangleFlatButton:
+        size_hint: 1, 1
+        md_bg_color: 0, 0, 0, 0
+        line_color: 1, 1, 1, 1
+        on_release:
+            root.manager.transition.direction = "left"
+            app.root.current = "home"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "Maintain Weight 4"
+
+    MDIconButton:
+        icon: "home"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "home"
+
+    MDLabel:
+        text: "Easy Food Recipes to Maintain Weight"
+        font_size: "22dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .82}
+
+    MDLabel:
+        text: "Chicken and Avocado Wrap"
+        font_size: "20dp"
+        bold: True
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+    Image:
+        source: 'wrap.png'
+        size_hint: None, None
+        width: "180dp"
+        height: "180dp"
+        pos_hint: {"center_x": .5, "center_y": .58}
+
+    MDLabel:
+        text: "[b]Ingredients:[/b] \n •4 oz. grilled chicken breast, sliced - 160 calories \n •1/2 avocado, sliced - 120 calories \n •1 large whole wheat tortilla - 150 calories \n •2 tablespoons ranch dressing - 140 calories \n\n[b]Total approximate calories:[/b] 570 calories \n[b]Directions:[/b] Toast the bread. Prepare the avocado. Place the sliced chicken breast and avocado on the center of the tortilla. Add dressing and wrap. Cut in half if desired."
+        font_size: "17dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .54, "center_y": .23}
+        markup: True
+
+<ProfileWindow>:
+    name: "profile"
+    id: profile
+
+    MDLabel:
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "account"
+        icon_size: "50sp"
+        pos_hint: {"center_x": .2, "center_y": .76}
+        theme_icon_color: "Custom"
+        icon_color: "#000000"
+        md_bg_color: "#ffffff"
+        on_release: app.root.current = "profile"
+
+        canvas.before:
+            Color:
+                rgba: self.icon_color if self.icon_color else (0, 0, 0, 1)
+            Line:
+                width: 2
+                circle: (self.center_x, self.center_y, self.width / 2 + 6)
+
+    FloatLayout:
+
+        MDBottomAppBar:
+            md_bg_color: "#004d00"
+            elevation: 1
+            height: 85
+
+        MDRoundFlatButton:
+            text: "Diary"
+            font_size: "20dp"
+            pos_hint: {"center_x": .18, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "diary"
+
+        MDRoundFlatButton:
+            text: "Home"
+            font_size: "20dp"
+            pos_hint: {"center_x": .47, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "home"
+
+        MDRoundFlatButton:
+            text: "Settings"
+            font_size: "20dp"
+            pos_hint: {"center_x": .77, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "settings"
+
+        MDLabel:
+            id: user
+            text: "User's name "
+            font_size: "30dp"
+            halign: "right"
+            color: "#000000"
+            pos_hint: {"center_x": .35, "center_y": .76}
+
+        MDLabel:
+            id: welcome_lbl
+            text: "My Account "
+            font_size: "24dp"
+            halign: "left"
+            color: "#000000"
+            pos_hint: {"center_x": .6, "center_y": .63}
+
+        MDRoundFlatButton:
+            text: "Personal Data                             "
+            font_size: "20dp"
+            pos_hint: {"center_x": .5, "center_y": .57}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "personal_data"
+
+        MDRoundFlatButton:
+            text:   "My Goals                                      "
+            font_size: "20dp"
+            pos_hint: {"center_x": .5, "center_y": .49}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "Goals"
+
+<PData>:
+    name: "personal_data"
+    id: personal_data
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "profile"
+
+    MDIconButton:
+        icon: "account"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#008000"
+        md_bg_color: "#ffffff"
+        on_release: app.root.current = "profile"
+
+    MDLabel:
+        id: username
+        text: "Username: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .70}
+    MDLabel:
+        id: email
+        text: "Email: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .65}
+    MDLabel:
+        id: password
+        text: "Password: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .60}
+    MDLabel:
+        id: customer_name
+        text: "Name: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .55}
+    MDLabel:
+        id: customer_age
+        text: "Age: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .50}
+    MDLabel:
+        id: customer_gender
+        text: "Gender: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .45}
+    MDLabel:
+        id: customer_height
+        text: "Height: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .40}
+    MDLabel:
+        id: customer_weight
+        text: "Weight: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .35}
+
+    FloatLayout:
+
+        MDBottomAppBar:
+            md_bg_color: "#004d00"
+            elevation: 1
+            height: 85
+
+        MDRoundFlatButton:
+            text: "Diary"
+            font_size: "20dp"
+            pos_hint: {"center_x": .18, "center_y": .05}
+            md_bg_color: "##008000"
+            text_color:  1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "diary"
+
+        MDRoundFlatButton:
+            text: "Home"
+            font_size: "20dp"
+            pos_hint: {"center_x": .47, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "home"
+
+        MDRoundFlatButton:
+            text: "Settings"
+            font_size: "20dp"
+            pos_hint: {"center_x": .77, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "settings"
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: "300dp", "45dp"
+            pos_hint: {"center_x": .5, "center_y": .8}
+            padding: 10
+            md_bg_color: [0, 128/255, 0, 1]
+            line_color: [0, 0, 0, 1]
+            radius: [20,]
+
+            MDLabel:
+                id: objective_lbl
+                text: "Personal Data"
+                font_size: "30dp"
+                halign: "center"
+                text_color: 1,1,1,1
+                theme_text_color: "Custom"
+
+<PGoals>:
+    name: "Goals"
+    id: Goals
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "profile"
+
+    MDIconButton:
+        icon: "account"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#008000"
+        md_bg_color: "#ffffff"
+        on_release: app.root.current = "profile"
+
+    MDLabel:
+        id: customer_objective
+        text: "Fitness Objective: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .70}
+    MDLabel:
+        id: customer_activity
+        text: "Activity Level: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .65}
+    MDLabel:
+        id: customer_desire
+        text: "Desired Weight: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .60}
+    MDLabel:
+        id: customer_months
+        text: "How Many Months Process: "
+        font_size: "20dp"
+        halign: 'left'
+        pos_hint: {"center_x": .55, "center_y": .55}
+
+    FloatLayout:
+
+        MDBottomAppBar:
+            md_bg_color: "#004d00"
+            elevation: 1
+            height: 85
+
+        MDRoundFlatButton:
+            text: "Diary"
+            font_size: "20dp"
+            pos_hint: {"center_x": .18, "center_y": .05}
+            md_bg_color: "##008000"
+            text_color:  1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "diary"
+
+        MDRoundFlatButton:
+            text: "Home"
+            font_size: "20dp"
+            pos_hint: {"center_x": .47, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "home"
+
+        MDRoundFlatButton:
+            text: "Settings"
+            font_size: "20dp"
+            pos_hint: {"center_x": .77, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "settings"
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: "300dp", "45dp"
+            pos_hint: {"center_x": .5, "center_y": .8}
+            padding: 10
+            md_bg_color: [0, 128/255, 0, 1]
+            line_color: [0, 0, 0, 1]
+            radius: [20,]
+
+            MDLabel:
+                id: objective_lbl
+                text: "My Goals"
+                font_size: "30dp"
+                halign: "center"
+                text_color: 1,1,1,1
+                theme_text_color: "Custom"
+
+<DiaryWindow>:
+    name: "diary"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        # Fixed
+        # 1st line - BUTTONS and LOGO
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)  # Adjust the height as needed
+            orientation: "horizontal"
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDIconButton:
+                icon: "arrow-left-bold-outline"
+                icon_size: "20sp"
+                theme_icon_color: "Custom"
+                icon_color: "#FFFFFF"
+                md_bg_color: "#008000"
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release:
+                    root.manager.transition.direction = "right"
+                    app.root.current = "home"
+
+            Widget:
+                size_hint_x: None
+                width: dp(20)
+
+            Image:
+                source: 'logo.png'
+                size_hint: None, None
+                size: dp(50), dp(45)
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDLabel:
+                id: welcome_lbl
+                text: "FITNESS GO"
+                font_size: "18dp"
+                halign: "center"
+                valign: "middle"
+                color: "#008000"
+                size_hint: None, None
+                width: dp(100)
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+            Widget:
+                size_hint_x: None
+                width: dp(50)
+
+            MDIconButton:
+                icon: "account"
+                icon_size: "20sp"
+                theme_icon_color: "Custom"
+                icon_color: "#FFFFFF"
+                md_bg_color: "#008000"
+                on_release:
+                    root.manager.transition.direction = "down"
+                    app.root.current = "profile"
+                size_hint: None, None
+                size: dp(50), dp(50)
+
+         # 2nd line: DIARY
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)  # Adjust the height as needed
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "Diary"
+                font_size: "40dp"
+                halign: "center"
+                color: "#008000"
+
+        # 3rd line - DATE BUTTON
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: None, None
+            size: "200dp", "50dp"
+            pos_hint: {'center_x': .45, 'center_y': .73}
+
+            MDRoundFlatButton:
+                id: date_button
+                size_hint: None, None
+                size: "250dp", "40dp"
+                text: app.date_text
+                font_size: "20sp"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                line_color: 0/255, 128/255 ,0/255 ,1
+                md_bg_color: 0/255, 128/255, 0/255, 1
+                on_release: app.show_date_picker()
+
+        # 4th line - CALORIE COUNTER
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)  # Adjust the height as needed
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDLabel:
+                id: food_item_label
+                text: "CALORIE COUNTER"
+                font_size: "25dp"
+                halign: "center"
+                color: "#008000"
+
+        # Middle part: Scrollable
+        ScrollView:
+            size_hint_y: 1
+            do_scroll_x: False
+            do_scroll_y: True
+
+            BoxLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                width: self.minimum_width
+                orientation: "vertical"
+                spacing: "20dp"
+                padding: "20dp"
+
+                GridLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    width: self.minimum_width
+                    cols: 1
+                    spacing: "20dp"
+                    padding: "10dp"
+
+                    MDCard:
+                        orientation: "vertical"
+                        padding: "8dp"
+                        size_hint: 1, None
+                        height: "100dp"
+                        border_radius: 20
+                        md_bg_color: "#008000"
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: dp(10)
+                            spacing: dp(10)
+
+                            MDLabel:
+                                id: food_item_label
+                                text: "Breakfast: "
+                                font_size: "20dp"
+                                halign: "center"
+                                color: "#FFFFFF"
+                                pos_hint: {"center_x": .1885, "center_y": .99}
+
+                    MDCard:
+                        orientation: "vertical"
+                        padding: "8dp"
+                        size_hint: 1, None
+                        height: "100dp"
+                        border_radius: 20
+                        md_bg_color: "#008000"
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: dp(10)
+                            spacing: dp(10)
+
+                            MDLabel:
+                                id: quantity_label
+                                text: "Lunch: "
+                                font_size: "20dp"
+                                halign: "center"
+                                color: "#FFFFFF"
+                                pos_hint: {"center_x": .1625, "center_y": .99}
+
+                    MDCard:
+                        orientation: "vertical"
+                        padding: "8dp"
+                        size_hint: 1, None
+                        height: "100dp"
+                        border_radius: 20
+                        md_bg_color: "#008000"
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: dp(10)
+                            spacing: dp(10)
+
+                            MDLabel:
+                                id: meal_label
+                                text: "Dinner: "
+                                font_size: "20dp"
+                                halign: "center"
+                                color: "#FFFFFF"
+                                pos_hint: {"center_x": .1659, "center_y": .99}
+
+                    MDCard:
+                        orientation: "vertical"
+                        padding: "8dp"
+                        size_hint: 1, None
+                        height: "100dp"
+                        border_radius: 20
+                        md_bg_color: "#008000"
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            padding: dp(10)
+                            spacing: dp(10)
+
+                            MDLabel:
+                                id: calories_label
+                                text: "Snack: "
+                                font_size: "20dp"
+                                halign: "center"
+                                color: "#FFFFFF"
+                                pos_hint: {"center_x": .170, "center_y": .99}
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: dp(10)
+                        spacing: dp(10)
+
+                        MDLabel:
+                            id: total_calories_label
+                            text: "Total Calories: "
+                            font_size: "15dp"
+                            halign: "center"
+                            color: "#008000"
+                            pos_hint: {"center_x": .78, "center_y": .20}
+
+
+        # Bottom part: Fixed
+        BoxLayout:
+            size_hint_y: None
+            height: dp(85)  # Adjust the height as needed
+            orientation: "horizontal"
+
+            FloatLayout:
+
+                MDBottomAppBar:
+                    md_bg_color: "#004d00"
+                    height: 85
+
+                MDRoundFlatButton:
+                    text: "Diary"
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .18, "center_y": .4}
+                    md_bg_color: "#ffffff"
+                    text_color: 0/255, 128/255 ,0/255 ,1
+                    line_color: 0/255, 128/255 ,0/255 ,1
+                    on_release:
+                        root.manager.transition.direction = "up"
+                        root.manager.current = "diary"
+
+                MDRoundFlatButton:
+                    text: "Home"
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .47, "center_y": .4}
+                    md_bg_color: "#008000"
+                    text_color: 1,1,1,1
+                    line_color: 0/255, 128/255 ,0/255 ,1
+                    on_release:
+                        root.manager.transition.direction = "up"
+                        root.manager.current = "home"
+
+                MDRoundFlatButton:
+                    text: "Settings"
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .77, "center_y": .4}
+                    md_bg_color: "#008000"
+                    text_color: 1,1,1,1
+                    line_color: 0/255, 128/255 ,0/255 ,1
+                    on_release:
+                        root.manager.transition.direction = "up"
+                        root.manager.current = "settings"
+
+<SettingsWindow>:
+    name: "settings"
+
+    MDLabel:
+        id: welcome_lbl
+        text: "FITNESS GO"
+        font_size: "18dp"
+        halign: "center"
+        color: "#008000"
+        pos_hint: {"center_x": .57, "center_y": .9}
+
+    Image:
+        source: 'logo.png'
+        size_hint: None, None
+        halign: "center"
+        width: "50dp"
+        height: "45dp"
+        pos_hint: {"center_x": .36, "center_y": .9}
+
+    MDIconButton:
+        icon: "arrow-left-bold-outline"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .1, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "right"
+            app.root.current = "home"
+
+    MDIconButton:
+        icon: "account"
+        icon_size: "20sp"
+        pos_hint: {"center_x": .9, "center_y": .9}
+        theme_icon_color: "Custom"
+        icon_color: "#FFFFFF"
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "down"
+            app.root.current = "profile"
+
+    MDLabel:
+        text: "Settings"
+        font_size: "40dp"
+        halign: "left"
+        color: "#008000"
+        pos_hint: {"center_x": .55, "center_y": .8}
+
+    MDCard:
+        size_hint: None, None
+        size: "320dp", "60dp"
+        pos_hint: {"center_x": .5, "center_y": .7}
+        md_bg_color: "#008000"
+        radius: 3,3,3,3
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "Dark Mode"
+                font_size: "25dp"
+                halign: "left"
+                size_hint_x: 0.6
+                color: "#ffffff"
+
+    MDSwitch:
+        id: switch
+        pos_hint: {"center_x": .8, "center_y": .69}
+        on_active: app.check(*args)
+        thumb_color_active: [1, 1, 1, 1]  # White color when active
+        thumb_color_inactive: [1, 1, 1, 1]  # White color when inactive
+        track_color_active: [0, 204/255, 0, 1]
+        track_color_inactive: [0, 179/255, 0, 1]
+
+    MDFlatButton:
+        width: "320dp"
+        height: "60dp"
+        pos_hint: {"center_x": .5, "center_y": .58}
+        md_bg_color: "#008000"
+        on_release:
+            root.manager.transition.direction = "left"
+            root.manager.current = "about"
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "About"
+                font_size: "25dp"
+                halign: "left"
+                size_hint_x: 0.6
+                color: "#ffffff"
+
+    MDFlatButton:
+        width: "320dp"
+        height: "60dp"
+        pos_hint: {"center_x": .5, "center_y": .46}
+        md_bg_color: "#008000"
+        on_release:
+            app.on_logout_btn_pressed()
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "Logout"
+                font_size: "25dp"
+                halign: "left"
+                size_hint_x: 0.6
+                color: "#ffffff"
+
+    FloatLayout:
+
+        MDBottomAppBar:
+            md_bg_color: "#004d00"
+            elevation: 1
+            height: 85
+
+        MDRoundFlatButton:
+            text: "Diary"
+            font_size: "20dp"
+            pos_hint: {"center_x": .18, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "diary"
+
+        MDRoundFlatButton:
+            text: "Home"
+            font_size: "20dp"
+            pos_hint: {"center_x": .47, "center_y": .05}
+            md_bg_color: "#008000"
+            text_color: 1,1,1,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "home"
+
+        MDRoundFlatButton:
+            text: "Settings"
+            font_size: "20dp"
+            pos_hint: {"center_x": .77, "center_y": .05}
+            md_bg_color: "#ffffff"
+            text_color: 0/255, 128/255 ,0/255 ,1
+            line_color: 0/255, 128/255 ,0/255 ,1
+            on_release:
+                root.manager.transition.direction = "up"
+                root.manager.current = "settings"
+
+<AboutWindow>:
+    name: "about"
+    BoxLayout:
+        orientation: "vertical"
+
+        # Top part: Fixed elements
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)  # Adjust the height as needed
+            orientation: "horizontal"
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDIconButton:
+                icon: "arrow-left-bold-outline"
+                icon_size: "20sp"
+                theme_icon_color: "Custom"
+                icon_color: "#FFFFFF"
+                md_bg_color: "#008000"
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release:
+                    root.manager.transition.direction = "right"
+                    app.root.current = "settings"
+
+            Widget:
+                size_hint_x: None
+                width: dp(20)
+
+            Image:
+                source: 'logo.png'
+                size_hint: None, None
+                size: dp(50), dp(45)
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDLabel:
+                id: welcome_lbl
+                text: "FITNESS GO"
+                font_size: "18dp"
+                halign: "center"
+                valign: "middle"
+                color: "#008000"
+                size_hint: None, None
+                width: dp(100)
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+            Widget:
+                size_hint_x: None
+                width: dp(50)
+
+            MDIconButton:
+                icon: "account"
+                icon_size: "20sp"
+                theme_icon_color: "Custom"
+                icon_color: "#FFFFFF"
+                md_bg_color: "#008000"
+                on_release: app.root.current = "profile"
+                size_hint: None, None
+                size: dp(50), dp(50)
+
+        ScrollView:
+            size_hint_y: 1  # Take the remaining space
+            do_scroll_x: False
+            do_scroll_y: True
+
+            BoxLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                width: self.minimum_width
+                orientation: "vertical"
+                spacing: "20dp"
+                padding: "20dp"
+
+                MDLabel:
+                    text: "About"
+                    font_size: "30dp"
+                    halign: "left"
+                    color: "#008000"
+                    pos_hint: {"center_x": .5, "center_y": .3}
+
+                GridLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    width: self.minimum_width
+                    cols: 1
+                    spacing: "20dp"
+                    padding: "10dp"
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1, None
+                    height: "250dp"
+                    border_radius: 20
+                    md_bg_color: "#008000"
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: dp(10)
+                        spacing: dp(10)
+
+                        MDLabel:
+                            text: "[b]Mission[/b] \n   Our mission is to simplify your journey to a healthier you. Fitness Go provides accurate and easy-to-use tools to track calories intake, discover healthy recipes that shows the exact calories, and personalized suggested exercises for each fitness goals. Our goal is to make healthy living easy, enjoyable, and sustainable for everyone. "
+                            font_size: "18dp"
+                            halign: "left"
+                            size_hint_x: 0.6
+                            color: "#ffffff"
+                            markup: True
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1, None
+                    height: "320dp"
+                    border_radius: 20
+                    md_bg_color: "#008000"
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: dp(10)
+                        spacing: dp(10)
+
+                        MDLabel:
+                            text: "[b]Vision[/b] \n     Our vision is to be your go-to app for a healthier lifestyle and become the leading fitness companion app that transforms the way people approach their health and wellness. We aspire to create a global community where users can effortlessly track their progress, discover nutritious recipes, and find motivation through personalized exercise recommendations, ultimately fostering a culture of lifelong fitness and well-being. "
+                            font_size: "18dp"
+                            halign: "left"
+                            size_hint_x: 0.6
+                            color: "#ffffff"
+                            markup: True
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1, None
+                    height: "500dp"
+                    border_radius: 20
+                    md_bg_color: "#008000"
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: dp(10)
+                        spacing: dp(10)
+
+                        MDLabel:
+                            text: "[b]Features[/b] \n  •It records the personal information of the user such as their name, age, gender, weight, height and the user’s fitness goal. \n\n •Calculates daily caloric requirements based on personal information and fitness goals. \n\n •It has search functionality that allows users to search for foods and view their calorie content. \n\n •It records the daily calorie log of the users and provides a summary of the calorie consumed. \n\n •Offers exercise suggestions aligned with user goals and provide healthy recipes which includes calorie count for each recipe that support users' fitness goals."
+                            font_size: "18dp"
+                            halign: "left"
+                            size_hint_x: 0.6
+                            color: "#ffffff"
+                            markup: True
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "8dp"
+                    size_hint: 1, None
+                    height: "180dp"
+                    border_radius: 20
+                    md_bg_color: "#008000"
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        padding: dp(10)
+                        spacing: dp(10)
+
+                        MDLabel:
+                            text: "[b]Developed by:[/b] \n Maningo, Stephanie Vianne M. \n Bartolay, Asshley Shane A. \n Taruc, Yukalhey R. \n Tamayo, Ellise James B. \n Bagsic, Jessy Ross L. \n Gonzaga, Jahjah"
+                            font_size: "18dp"
+                            halign: "left"
+                            size_hint_x: 0.6
+                            color: "#ffffff"
+                            markup: True
